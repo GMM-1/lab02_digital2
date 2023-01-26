@@ -7,7 +7,7 @@ compilador: XC8
 proyecto: laboratorio 02
 hardware: PIC 16F887
 creado: 24/01/2023
-última modificación:
+última modificación: 25/01/2023
  ********************************************************************************
  */
 
@@ -28,22 +28,50 @@ creado: 24/01/2023
 #pragma config WRT = OFF        // Flash Program Memory Self Write Enable bits (Write protection off)
 
 #define _XTAL_FREQ 4000000
+
+////////////////////////////////////////////////////////////////////////////////
+// LIBRERIAS
+////////////////////////////////////////////////////////////////////////////////
+
 #include <xc.h>
 #include <stdio.h>
 
-#include "adc.h"                        // Libreria para el manejo del ADC
-#include "lcd.h"                        // Libreria para el control de la pantalla LCD
-#include "map_function.h"               // Libreria de conversiones
-#include "uart.h"                       // Libreria para transmicion y recepcion de datos
+#include "adc.h"            // Libreria para el manejo del ADC
+#include "lcd.h"            // Libreria para el control de la pantalla LCD
+#include "map_function.h"   // Libreria de conversiones
+#include "uart.h"           // Libreria para transmicion y recepcion de datos
 
-char buffer_LCD[20];
-char buffer_UART[30];
-char dato_rx;
+////////////////////////////////////////////////////////////////////////////////
+// VARIABLES
+////////////////////////////////////////////////////////////////////////////////
+
+//VARIABLES PARA USO DE LA PANTALLA LCD
+char buffer_LCD[20];        //buffer para las cadenas de la pantalla lcd
+unsigned char contador = 0; //variable para contador de la terminal
+
+//VARIABLES PARA MANEJO DEL ADC Y VISUALIZACION
+unsigned char valor_ch0;    //variable para guardar resultado del ADC 1
+unsigned char valor_ch1;    //variable para guardar el resultado del ADC 2
+unsigned char voltaje1;     //valor mapeado del ADC 1
+unsigned char voltaje2;     //valor mapeado del ADC 2
+unsigned char unidad_V1;    //Unidades del ADC 1 mostrado como voltaje
+unsigned char decima_V1;    //decimas del ADC 1 mostrado como voltaje
+unsigned char centesima_V1; //centesimas del ADC 1 mostrado como voltaje
+unsigned char unidad_V2;    //Unidades del ADC 2 mostrado como voltaje
+unsigned char decima_V2;    //decimas del ADC 2 mostrado como voltaje
+unsigned char centesima_V2; //centesimas del ADC 2 mostrado como voltaje
+
+//VARIABLES PARA USO DEL UART
+char buffer_UART[30];       //buffer para las cadenas de transmicion del UART
+char dato_rx;               //dato recibido de la terminal
 
 ////////////////////////////////////////////////////////////////////////////////
 // PROTOTIPOS DE FUNCIONES
 ////////////////////////////////////////////////////////////////////////////////
 void setupINTOSC(void);
+void ADC_CONV_V(void);
+void VISUAL_LCD(void);
+void TX_RX(void);
 
 ////////////////////////////////////////////////////////////////////////////////
 // CODIGO PRINCIPAL
@@ -51,64 +79,20 @@ void setupINTOSC(void);
 
 void main()
 {
-    setupINTOSC();        // Configuracion del oscilador
-    ADC_Init(AN0);       // Inicializa el ADC para el puerto AN0
-    ADC_Init(AN1);      // Inicializa el ADC para el puerto AN1
-    Lcd_Init();        // Inicializa la pantalla LCD
-    Uart_Init(9600);  // Inicializa el UART a 9600 baudios
-    unsigned char contador = 0;
+    setupINTOSC();      // Configuracion del oscilador
 
+    //Inicializacion de los registros
+    ADC_Init(AN0);      // Inicializa el ADC para el puerto AN0
+    ADC_Init(AN1);      // Inicializa el ADC para el puerto AN1
+    Lcd_Init();         // Inicializa la pantalla LCD
+    Uart_Init(9600);    // Inicializa el UART a 9600 baudios
+
+    //bucle infinito
     while(1)
     {
-        PORTB = contador;
-
-        unsigned char valor_ch0 = ADC_Read(0);    // Lectura del canal 0
-        unsigned char valor_ch1 = ADC_Read(1);    // Lectura del canal 1
-        unsigned char voltaje1 = map(valor_ch0, 0, 255, 0, 100);  //conversion %
-        unsigned char voltaje2 = map(valor_ch1, 0, 255, 0, 100);  //conversion %
-
-        unsigned char unidad_V1 = (voltaje1*5)/100;
-        unsigned char decima_V1 = ((voltaje1*5)/10)%10;
-        unsigned char centesima_V1 = (voltaje1*5)%10;
-
-        unsigned char unidad_V2 = (voltaje2*5)/100;
-        unsigned char decima_V2 = ((voltaje2*5)/10)%10;
-        unsigned char centesima_V2 = (voltaje2*5)%10;
-
-        Lcd_Set_Cursor(1,1);
-        sprintf(buffer_LCD, "S1:    S2:    cont:");
-        Lcd_Write_String(buffer_LCD);
-
-        Lcd_Set_Cursor(2,1);
-        sprintf(buffer_LCD, "%u.%u%u  %u.%u%u    %u  ", unidad_V1, decima_V1,
-        centesima_V1, unidad_V2, decima_V2, centesima_V2, contador);
-        Lcd_Write_String(buffer_LCD);
-
-        Lcd_Set_Cursor(3,1);
-        sprintf(buffer_LCD, " voltajes y contador ");
-        Lcd_Write_String(buffer_LCD);
-
-        Lcd_Set_Cursor(4,1);
-        sprintf(buffer_LCD, "   LABORATORIO 02   ");
-        Lcd_Write_String(buffer_LCD);
-        __delay_ms(150);
-
-        sprintf(buffer_UART, "Valor ADC1: %u , Valor ADC2: %u\r\n",valor_ch0, valor_ch1);
-        Uart_Send_String(buffer_UART);
-        __delay_ms(150);
-
-        if(Uart_Available() >0) //verifica si se manda un dato
-        {
-            dato_rx = Uart_Read(); //guardamos en una variable el dato
-            if(dato_rx == '+')
-            {
-                contador = contador + 1;
-            }
-            if(dato_rx == '-')
-            {
-                contador = contador - 1;
-            }
-        }
+        ADC_CONV_V();       // Conversion del valor del ADC a voltaje
+        VISUAL_LCD();       // Mensajes que visualizar en la pantalla LCD
+        TX_RX();            // Recepcion y transmicion de mensajes
     }
 }
 
@@ -116,7 +100,8 @@ void main()
 // FUNCIONES
 ////////////////////////////////////////////////////////////////////////////////
 
-void setupINTOSC(void) {
+void setupINTOSC(void)
+{
     //Seleccion de Oscilador interno
     OSCCONbits.SCS = 1;
 
@@ -125,6 +110,69 @@ void setupINTOSC(void) {
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 0;
 
+    //puerto del contador (salida)
     TRISB = 0;
     PORTB = 0;
+}
+
+void ADC_CONV_V(void)
+{
+  valor_ch0 = ADC_Read(0);    // Lectura del canal 0
+  valor_ch1 = ADC_Read(1);    // Lectura del canal 1
+  voltaje1 = map(valor_ch0, 0, 255, 0, 100);  //mapeo
+  voltaje2 = map(valor_ch1, 0, 255, 0, 100);  //mapeo
+
+  //conversiones para mostrar el ADC 1 como voltaje
+  unidad_V1 = (voltaje1*5)/100;         // unidades voltaje 1
+  decima_V1 = ((voltaje1*5)/10)%10;     // decimas voltaje 1
+  centesima_V1 = (voltaje1*5)%10;       // centesimas voltaje 1
+
+  //conversiones para mostrar el ADC 2 como voltaje
+  unidad_V2 = (voltaje2*5)/100;         // unidades voltaje 2
+  decima_V2 = ((voltaje2*5)/10)%10;     // decimas voltaje 2
+  centesima_V2 = (voltaje2*5)%10;       // centesimas voltaje 2
+}
+
+void VISUAL_LCD(void)
+{
+ Lcd_Set_Cursor(1,1);   //direccion donde se escribira
+ sprintf(buffer_LCD, "S1:    S2:    cont:");    //mensaje
+ Lcd_Write_String(buffer_LCD);  //imprimir mensaje
+
+ Lcd_Set_Cursor(2,1);   //direccion donde se escribira
+ sprintf(buffer_LCD, "%u.%u%u  %u.%u%u    %u  ", unidad_V1, decima_V1, //mensaje
+ centesima_V1, unidad_V2, decima_V2, centesima_V2, contador);   //variables
+ Lcd_Write_String(buffer_LCD);  //imprimir mensaje
+
+ Lcd_Set_Cursor(3,1);   //direccion donde se escribira
+ sprintf(buffer_LCD, " voltajes y contador ");  //mensaje
+ Lcd_Write_String(buffer_LCD);  //imprimir mensaje
+
+ Lcd_Set_Cursor(4,1);   //direccion donde se escribira
+ sprintf(buffer_LCD, "   LABORATORIO 02   ");   //mensaje
+ Lcd_Write_String(buffer_LCD);  //imprimir mensaje
+
+ __delay_ms(150);   //delay de funcionamiento
+}
+
+void TX_RX(void)
+{
+ sprintf(buffer_UART, "Valor ADC1: %u , Valor ADC2: %u\r\n", //mensaje a transmitir
+         valor_ch0, valor_ch1); //variables
+ Uart_Send_String(buffer_UART); //mandar mensaje
+ __delay_ms(150);               //delay de funcionamiento
+
+        if(Uart_Available() >0) //verifica si se esta mandando un dato
+        {
+            dato_rx = Uart_Read(); //guardamos en una variable el dato
+            if(dato_rx == '+') //verificamos el caracter
+            {
+                contador = contador + 1; //si se cumple incrementamos
+            }
+            if(dato_rx == '-') //verificamor el caracter
+            {
+                contador = contador - 1; // si se cumple decrementamos
+            }
+        }
+        PORTB = contador;   // asignamos el valor del contador al puerto
 }
