@@ -7,7 +7,7 @@ compilador: XC8
 proyecto: laboratorio 02
 hardware: PIC 16F887
 creado: 24/01/2023
-última modificación: 
+última modificación:
  ********************************************************************************
  */
 
@@ -34,8 +34,10 @@ creado: 24/01/2023
 #include "adc.h"                        // Libreria para el manejo del ADC
 #include "lcd.h"                        // Libreria para el control de la pantalla LCD
 #include "map_function.h"               // Libreria de conversiones
+#include "uart.h"                       // Libreria para transmicion y recepcion de datos
 
-char buffer[20];
+char buffer_LCD[20];
+char buffer_UART[30];
 
 ////////////////////////////////////////////////////////////////////////////////
 // PROTOTIPOS DE FUNCIONES
@@ -48,11 +50,12 @@ void setupINTOSC(void);
 
 void main()
 {
-    setupINTOSC();        // Configuracion del oscilador 
+    setupINTOSC();        // Configuracion del oscilador
     ADC_Init(AN0);       // Inicializa el ADC para el puerto AN0
     ADC_Init(AN1);      // Inicializa el ADC para el puerto AN1
     Lcd_Init();        // Inicializa la pantalla LCD
-    
+    Uart_Init(9600);  // Inicializa el UART a 9600 baudios
+
     while(1)
     {
         unsigned char contador = 0;
@@ -60,33 +63,39 @@ void main()
         unsigned char valor_ch1 = ADC_Read(1);    // Lectura del canal 1
         unsigned char voltaje1 = map(valor_ch0, 0, 255, 0, 100);  //conversion %
         unsigned char voltaje2 = map(valor_ch1, 0, 255, 0, 100);  //conversion %
-        
-       
+
+
         unsigned char unidad_V1 = (voltaje1*5)/100;
         unsigned char decima_V1 = ((voltaje1*5)/10)%10;
-        unsigned char centesima_V1 = (voltaje1*5)%10; 
-        
+        unsigned char centesima_V1 = (voltaje1*5)%10;
+
         unsigned char unidad_V2 = (voltaje2*5)/100;
         unsigned char decima_V2 = ((voltaje2*5)/10)%10;
-        unsigned char centesima_V2 = (voltaje2*5)%10; 
-        
+        unsigned char centesima_V2 = (voltaje2*5)%10;
+
         Lcd_Set_Cursor(1,1);
-        sprintf(buffer, "S1:    S2:    cont:");
-        Lcd_Write_String(buffer);
-        
+        sprintf(buffer_LCD, "S1:    S2:    cont:");
+        Lcd_Write_String(buffer_LCD);
+
         Lcd_Set_Cursor(2,1);
-        sprintf(buffer, "%u.%u%u  %u.%u%u    %u  ", unidad_V1, decima_V1, 
-                centesima_V1, unidad_V2, decima_V2, centesima_V2, contador);
-        Lcd_Write_String(buffer);
-        
+        sprintf(buffer_LCD, "%u.%u%u  %u.%u%u    %u  ", unidad_V1, decima_V1,
+        centesima_V1, unidad_V2, decima_V2, centesima_V2, contador);
+        Lcd_Write_String(buffer_LCD);
+
         Lcd_Set_Cursor(3,1);
-        sprintf(buffer, " voltajes y contador ");
-        Lcd_Write_String(buffer);
-        
+        sprintf(buffer_LCD, " voltajes y contador ");
+        Lcd_Write_String(buffer_LCD);
+
         Lcd_Set_Cursor(4,1);
-        sprintf(buffer, "   LABORATORIO 02   ");
-        Lcd_Write_String(buffer);
+        sprintf(buffer_LCD, "   LABORATORIO 02   ");
+        Lcd_Write_String(buffer_LCD);
         __delay_ms(150);
+
+        sprintf(buffer_UART, "Valor V1: %u.%u%u , Valor V2: %u.%u%u\r\n",unidad_V1, decima_V1,
+        centesima_V1, unidad_V2, decima_V2, centesima_V2 );
+        Uart_Send_String(buffer_UART);
+        __delay_ms(150);
+
     }
 }
 
