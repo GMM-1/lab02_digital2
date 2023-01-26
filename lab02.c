@@ -56,10 +56,12 @@ void main()
     ADC_Init(AN1);      // Inicializa el ADC para el puerto AN1
     Lcd_Init();        // Inicializa la pantalla LCD
     Uart_Init(9600);  // Inicializa el UART a 9600 baudios
+    unsigned char contador = 0;
 
     while(1)
     {
-        unsigned char contador = 0;
+        PORTB = contador;
+
         unsigned char valor_ch0 = ADC_Read(0);    // Lectura del canal 0
         unsigned char valor_ch1 = ADC_Read(1);    // Lectura del canal 1
         unsigned char voltaje1 = map(valor_ch0, 0, 255, 0, 100);  //conversion %
@@ -100,11 +102,11 @@ void main()
             dato_rx = Uart_Read(); //guardamos en una variable el dato
             if(dato_rx == '+')
             {
-                PORTB = PORTB++;
+                contador = contador + 1;
             }
             if(dato_rx == '-')
             {
-                PORTB = PORTB--;
+                contador = contador - 1;
             }
         }
     }
