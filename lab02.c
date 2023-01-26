@@ -38,6 +38,7 @@ creado: 24/01/2023
 
 char buffer_LCD[20];
 char buffer_UART[30];
+char dato_rx;
 
 ////////////////////////////////////////////////////////////////////////////////
 // PROTOTIPOS DE FUNCIONES
@@ -63,7 +64,6 @@ void main()
         unsigned char valor_ch1 = ADC_Read(1);    // Lectura del canal 1
         unsigned char voltaje1 = map(valor_ch0, 0, 255, 0, 100);  //conversion %
         unsigned char voltaje2 = map(valor_ch1, 0, 255, 0, 100);  //conversion %
-
 
         unsigned char unidad_V1 = (voltaje1*5)/100;
         unsigned char decima_V1 = ((voltaje1*5)/10)%10;
@@ -91,11 +91,22 @@ void main()
         Lcd_Write_String(buffer_LCD);
         __delay_ms(150);
 
-        sprintf(buffer_UART, "Valor V1: %u.%u%u , Valor V2: %u.%u%u\r\n",unidad_V1, decima_V1,
-        centesima_V1, unidad_V2, decima_V2, centesima_V2 );
+        sprintf(buffer_UART, "Valor ADC1: %u , Valor ADC2: %u\r\n",valor_ch0, valor_ch1);
         Uart_Send_String(buffer_UART);
         __delay_ms(150);
 
+        if(Uart_Available() >0) //verifica si se manda un dato
+        {
+            dato_rx = Uart_Read(); //guardamos en una variable el dato
+            if(dato_rx == '+')
+            {
+                PORTB = PORTB++;
+            }
+            if(dato_rx == '-')
+            {
+                PORTB = PORTB--;
+            }
+        }
     }
 }
 
@@ -111,4 +122,7 @@ void setupINTOSC(void) {
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 0;
+
+    TRISB = 0;
+    PORTB = 0;
 }
