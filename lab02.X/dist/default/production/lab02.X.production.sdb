@@ -1,0 +1,544 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F887 ]
+[d frameptr 0 ]
+"3 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X/map_function.h
+[v _map map `(l  1 e 4 0 ]
+"3 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\adc.c
+[v _ADC_Init ADC_Init `(v  1 e 1 0 ]
+"10
+[v _ADC_Read ADC_Read `(ui  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"505 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\doprnt.c
+[v _sprintf sprintf `(i  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"80 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\lab02.c
+[v _main main `(v  1 e 1 0 ]
+"104
+[v _setupINTOSC setupINTOSC `(v  1 e 1 0 ]
+"133
+[v _ADC_CONV_V ADC_CONV_V `(v  1 e 1 0 ]
+"151
+[v _VISUAL_LCD VISUAL_LCD `(v  1 e 1 0 ]
+"165
+[v _TX_RX TX_RX `(v  1 e 1 0 ]
+"13 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\LCD.c
+[v _Lcd_Port Lcd_Port `(v  1 e 1 0 ]
+"55
+[v _Lcd_Cmd Lcd_Cmd `(v  1 e 1 0 ]
+"63
+[v _Lcd_Clear Lcd_Clear `(v  1 e 1 0 ]
+"68
+[v _Lcd_Set_Cursor Lcd_Set_Cursor `(v  1 e 1 0 ]
+"79
+[v _Lcd_Init Lcd_Init `(v  1 e 1 0 ]
+"95
+[v _Lcd_Write_Char Lcd_Write_Char `(v  1 e 1 0 ]
+"103
+[v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
+"3 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\uart.c
+[v _Uart_Init Uart_Init `(v  1 e 1 0 ]
+"16
+[v _Uart_Available Uart_Available `(s  1 e 2 0 ]
+"21
+[v _Uart_Send_Char Uart_Send_Char `(v  1 e 1 0 ]
+"27
+[v _Uart_Send_String Uart_Send_String `(v  1 e 1 0 ]
+"35
+[v _Uart_Read Uart_Read `(uc  1 e 1 0 ]
+"167 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+"229
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+[s S477 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"246
+[u S486 . 1 `S477 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES486  1 e 1 @6 ]
+"291
+[v _PORTC PORTC `VEuc  1 e 1 @7 ]
+"353
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+[s S498 . 1 `uc 1 RD0 1 0 :1:0 
+`uc 1 RD1 1 0 :1:1 
+`uc 1 RD2 1 0 :1:2 
+`uc 1 RD3 1 0 :1:3 
+`uc 1 RD4 1 0 :1:4 
+`uc 1 RD5 1 0 :1:5 
+`uc 1 RD6 1 0 :1:6 
+`uc 1 RD7 1 0 :1:7 
+]
+"370
+[u S507 . 1 `S498 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES507  1 e 1 @8 ]
+"415
+[v _PORTE PORTE `VEuc  1 e 1 @9 ]
+[s S309 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"554
+[u S317 . 1 `S309 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES317  1 e 1 @12 ]
+"1039
+[v _RCSTA RCSTA `VEuc  1 e 1 @24 ]
+[s S366 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"1069
+[s S375 . 1 `uc 1 RCD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 RC9 1 0 :1:6 
+]
+[s S379 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 nRC8 1 0 :1:6 
+]
+[s S382 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RC8_9 1 0 :1:6 
+]
+[u S385 . 1 `S366 1 . 1 0 `S375 1 . 1 0 `S379 1 . 1 0 `S382 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES385  1 e 1 @24 ]
+"1134
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"1141
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
+"1239
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+"1246
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
+[s S205 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+`uc 1 ADCS 1 0 :2:6 
+]
+"1277
+[s S210 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+`uc 1 ADCS0 1 0 :1:6 
+`uc 1 ADCS1 1 0 :1:7 
+]
+[s S219 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S222 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[u S225 . 1 `S205 1 . 1 0 `S210 1 . 1 0 `S219 1 . 1 0 `S222 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES225  1 e 1 @31 ]
+"1479
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1541
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
+[s S262 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1558
+[u S271 . 1 `S262 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES271  1 e 1 @135 ]
+"1603
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+[s S85 . 1 `uc 1 SCS 1 0 :1:0 
+`uc 1 LTS 1 0 :1:1 
+`uc 1 HTS 1 0 :1:2 
+`uc 1 OSTS 1 0 :1:3 
+`uc 1 IRCF 1 0 :3:4 
+]
+"1883
+[s S91 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 IRCF0 1 0 :1:4 
+`uc 1 IRCF1 1 0 :1:5 
+`uc 1 IRCF2 1 0 :1:6 
+]
+[u S96 . 1 `S85 1 . 1 0 `S91 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES96  1 e 1 @143 ]
+"2557
+[v _TXSTA TXSTA `VEuc  1 e 1 @152 ]
+[s S328 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"2583
+[s S337 . 1 `uc 1 TXD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 nTX8 1 0 :1:6 
+]
+[s S341 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[u S344 . 1 `S328 1 . 1 0 `S337 1 . 1 0 `S341 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES344  1 e 1 @152 ]
+"2643
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"2705
+[v _SPBRGH SPBRGH `VEuc  1 e 1 @154 ]
+"2978
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
+"3336
+[v _BAUDCTL BAUDCTL `VEuc  1 e 1 @391 ]
+[s S286 . 1 `uc 1 ABDEN 1 0 :1:0 
+`uc 1 WUE 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 BRG16 1 0 :1:3 
+`uc 1 SCKP 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 RCIDL 1 0 :1:6 
+`uc 1 ABDOVF 1 0 :1:7 
+]
+"3353
+[u S295 . 1 `S286 1 . 1 0 ]
+[v _BAUDCTLbits BAUDCTLbits `VES295  1 e 1 @391 ]
+[s S57 . 1 `uc 1 ANS0 1 0 :1:0 
+`uc 1 ANS1 1 0 :1:1 
+`uc 1 ANS2 1 0 :1:2 
+`uc 1 ANS3 1 0 :1:3 
+`uc 1 ANS4 1 0 :1:4 
+`uc 1 ANS5 1 0 :1:5 
+`uc 1 ANS6 1 0 :1:6 
+`uc 1 ANS7 1 0 :1:7 
+]
+"3405
+[u S66 . 1 `S57 1 . 1 0 ]
+[v _ANSELbits ANSELbits `VES66  1 e 1 @392 ]
+"3450
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"358 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\doprnt.c
+[v _dpowers dpowers `DC[5]ui  1 s 10 dpowers ]
+"49 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\lab02.c
+[v _buffer_LCD buffer_LCD `[30]uc  1 e 30 0 ]
+"50
+[v _contador contador `uc  1 e 1 0 ]
+"53
+[v _valor_ch0 valor_ch0 `uc  1 e 1 0 ]
+"54
+[v _valor_ch1 valor_ch1 `uc  1 e 1 0 ]
+"55
+[v _voltaje1 voltaje1 `uc  1 e 1 0 ]
+"56
+[v _voltaje2 voltaje2 `uc  1 e 1 0 ]
+"57
+[v _unidad_V1 unidad_V1 `uc  1 e 1 0 ]
+"58
+[v _decima_V1 decima_V1 `uc  1 e 1 0 ]
+"59
+[v _centesima_V1 centesima_V1 `uc  1 e 1 0 ]
+"60
+[v _unidad_V2 unidad_V2 `uc  1 e 1 0 ]
+"61
+[v _decima_V2 decima_V2 `uc  1 e 1 0 ]
+"62
+[v _centesima_V2 centesima_V2 `uc  1 e 1 0 ]
+"65
+[v _buffer_UART buffer_UART `[30]uc  1 e 30 0 ]
+"66
+[v _dato_rx dato_rx `uc  1 e 1 0 ]
+"80
+[v _main main `(v  1 e 1 0 ]
+{
+"98
+} 0
+"104
+[v _setupINTOSC setupINTOSC `(v  1 e 1 0 ]
+{
+"131
+} 0
+"151
+[v _VISUAL_LCD VISUAL_LCD `(v  1 e 1 0 ]
+{
+"163
+} 0
+"103 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\LCD.c
+[v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
+{
+"104
+[v Lcd_Write_String@i i `i  1 a 2 8 ]
+"103
+[v Lcd_Write_String@a a `*.26uc  1 p 2 3 ]
+"107
+} 0
+"95
+[v _Lcd_Write_Char Lcd_Write_Char `(v  1 e 1 0 ]
+{
+[v Lcd_Write_Char@a a `uc  1 a 1 wreg ]
+[v Lcd_Write_Char@a a `uc  1 a 1 wreg ]
+[v Lcd_Write_Char@a a `uc  1 a 1 2 ]
+"101
+} 0
+"68
+[v _Lcd_Set_Cursor Lcd_Set_Cursor `(v  1 e 1 0 ]
+{
+[v Lcd_Set_Cursor@a a `uc  1 a 1 wreg ]
+"69
+[v Lcd_Set_Cursor@temp temp `uc  1 a 1 6 ]
+"68
+[v Lcd_Set_Cursor@a a `uc  1 a 1 wreg ]
+[v Lcd_Set_Cursor@b b `uc  1 p 1 4 ]
+"70
+[v Lcd_Set_Cursor@a a `uc  1 a 1 5 ]
+"77
+} 0
+"3 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\uart.c
+[v _Uart_Init Uart_Init `(v  1 e 1 0 ]
+{
+"11
+[v Uart_Init@vx vx `ui  1 a 2 8 ]
+"3
+[v Uart_Init@baud baud `ul  1 p 4 0 ]
+"14
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+{
+"10
+[v ___lldiv@quotient quotient `ul  1 a 4 9 ]
+"11
+[v ___lldiv@counter counter `uc  1 a 1 13 ]
+"5
+[v ___lldiv@divisor divisor `ul  1 p 4 0 ]
+[v ___lldiv@dividend dividend `ul  1 p 4 4 ]
+"30
+} 0
+"165 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\lab02.c
+[v _TX_RX TX_RX `(v  1 e 1 0 ]
+{
+"185
+} 0
+"505 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\doprnt.c
+[v _sprintf sprintf `(i  1 e 2 0 ]
+{
+[v sprintf@sp sp `*.4uc  1 a 1 wreg ]
+"545
+[v sprintf@val val `ui  1 a 2 20 ]
+"512
+[v sprintf@c c `uc  1 a 1 24 ]
+"521
+[v sprintf@prec prec `c  1 a 1 22 ]
+"507
+[v sprintf@ap ap `[1]*.4v  1 a 1 19 ]
+"525
+[v sprintf@flag flag `uc  1 a 1 18 ]
+"505
+[v sprintf@sp sp `*.4uc  1 a 1 wreg ]
+[v sprintf@f f `*.24DCuc  1 p 1 0 ]
+"550
+[v sprintf@sp sp `*.4uc  1 a 1 23 ]
+"1567
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwmod@counter counter `uc  1 a 1 13 ]
+"5
+[v ___lwmod@divisor divisor `ui  1 p 2 8 ]
+[v ___lwmod@dividend dividend `ui  1 p 2 10 ]
+"25
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwdiv@quotient quotient `ui  1 a 2 5 ]
+"11
+[v ___lwdiv@counter counter `uc  1 a 1 7 ]
+"5
+[v ___lwdiv@divisor divisor `ui  1 p 2 0 ]
+[v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
+"30
+} 0
+"27 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\uart.c
+[v _Uart_Send_String Uart_Send_String `(v  1 e 1 0 ]
+{
+[v Uart_Send_String@info info `*.4uc  1 a 1 wreg ]
+[v Uart_Send_String@info info `*.4uc  1 a 1 wreg ]
+[v Uart_Send_String@info info `*.4uc  1 a 1 2 ]
+"33
+} 0
+"21
+[v _Uart_Send_Char Uart_Send_Char `(v  1 e 1 0 ]
+{
+[v Uart_Send_Char@txData txData `uc  1 a 1 wreg ]
+[v Uart_Send_Char@txData txData `uc  1 a 1 wreg ]
+[v Uart_Send_Char@txData txData `uc  1 a 1 0 ]
+"25
+} 0
+"35
+[v _Uart_Read Uart_Read `(uc  1 e 1 0 ]
+{
+"45
+} 0
+"16
+[v _Uart_Available Uart_Available `(s  1 e 2 0 ]
+{
+"19
+} 0
+"79 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\LCD.c
+[v _Lcd_Init Lcd_Init `(v  1 e 1 0 ]
+{
+"93
+} 0
+"63
+[v _Lcd_Clear Lcd_Clear `(v  1 e 1 0 ]
+{
+"66
+} 0
+"55
+[v _Lcd_Cmd Lcd_Cmd `(v  1 e 1 0 ]
+{
+[v Lcd_Cmd@a a `uc  1 a 1 wreg ]
+[v Lcd_Cmd@a a `uc  1 a 1 wreg ]
+[v Lcd_Cmd@a a `uc  1 a 1 3 ]
+"61
+} 0
+"13
+[v _Lcd_Port Lcd_Port `(v  1 e 1 0 ]
+{
+[v Lcd_Port@a a `uc  1 a 1 wreg ]
+[v Lcd_Port@a a `uc  1 a 1 wreg ]
+[v Lcd_Port@a a `uc  1 a 1 0 ]
+"53
+} 0
+"3 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\adc.c
+[v _ADC_Init ADC_Init `(v  1 e 1 0 ]
+{
+[v ADC_Init@p_ang p_ang `uc  1 a 1 wreg ]
+[v ADC_Init@p_ang p_ang `uc  1 a 1 wreg ]
+"5
+[v ADC_Init@p_ang p_ang `uc  1 a 1 0 ]
+"8
+} 0
+"133 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\lab02.c
+[v _ADC_CONV_V ADC_CONV_V `(v  1 e 1 0 ]
+{
+"149
+} 0
+"3 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X/map_function.h
+[v _map map `(l  1 e 4 0 ]
+{
+[v map@x x `l  1 p 4 14 ]
+[v map@eMin eMin `l  1 p 4 18 ]
+[v map@eMax eMax `l  1 p 4 22 ]
+[v map@sMin sMin `l  1 p 4 26 ]
+[v map@sMax sMax `l  1 p 4 30 ]
+"6
+} 0
+"15 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+{
+"17
+[v ___lmul@product product `ul  1 a 4 9 ]
+"15
+[v ___lmul@multiplier multiplier `ul  1 p 4 0 ]
+[v ___lmul@multiplicand multiplicand `ul  1 p 4 4 ]
+"129
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+{
+"10
+[v ___aldiv@quotient quotient `l  1 a 4 10 ]
+"11
+[v ___aldiv@sign sign `uc  1 a 1 9 ]
+[v ___aldiv@counter counter `uc  1 a 1 8 ]
+"5
+[v ___aldiv@divisor divisor `l  1 p 4 0 ]
+[v ___aldiv@dividend dividend `l  1 p 4 4 ]
+"41
+} 0
+"15 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 4 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
+"53
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 13 ]
+[v ___awmod@counter counter `uc  1 a 1 12 ]
+"5
+[v ___awmod@divisor divisor `i  1 p 2 4 ]
+[v ___awmod@dividend dividend `i  1 p 2 6 ]
+"34
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 2 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 1 ]
+[v ___awdiv@counter counter `uc  1 a 1 0 ]
+"5
+[v ___awdiv@divisor divisor `i  1 p 2 6 ]
+[v ___awdiv@dividend dividend `i  1 p 2 8 ]
+"41
+} 0
+"10 C:\Users\gaban\OneDrive\Documentos\QUINTO_SEMESTRE\digital_II\lab02.X\adc.c
+[v _ADC_Read ADC_Read `(ui  1 e 2 0 ]
+{
+[v ADC_Read@ch ch `uc  1 a 1 wreg ]
+[v ADC_Read@ch ch `uc  1 a 1 wreg ]
+"12
+[v ADC_Read@ch ch `uc  1 a 1 4 ]
+"22
+} 0
