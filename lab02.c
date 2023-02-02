@@ -37,7 +37,7 @@ creado: 24/01/2023
 #include <stdio.h>
 
 #include "adc.h"            // Libreria para el manejo del ADC
-#include "lcd.h"            // Libreria para el control de la pantalla LCD
+#include "LCD.h"            // Libreria para el control de la pantalla LCD
 #include "map_function.h"   // Libreria de conversiones
 #include "uart.h"           // Libreria para transmicion y recepcion de datos
 
@@ -46,7 +46,7 @@ creado: 24/01/2023
 ////////////////////////////////////////////////////////////////////////////////
 
 //VARIABLES PARA USO DE LA PANTALLA LCD
-char buffer_LCD[20];        //buffer para las cadenas de la pantalla lcd
+char buffer_LCD[30];        //buffer para las cadenas de la pantalla lcd
 unsigned char contador = 0; //variable para contador de la terminal
 
 //VARIABLES PARA MANEJO DEL ADC Y VISUALIZACION
@@ -84,8 +84,9 @@ void main()
     //Inicializacion de los registros
     ADC_Init(AN0);      // Inicializa el ADC para el puerto AN0
     ADC_Init(AN1);      // Inicializa el ADC para el puerto AN1
-    Lcd_Init();         // Inicializa la pantalla LCD
     Uart_Init(9600);    // Inicializa el UART a 9600 baudios
+    Lcd_Init();         // Inicializa la pantalla LCD
+    Lcd_Clear(); //Limpiar pantalla
 
     //bucle infinito
     while(1)
@@ -102,17 +103,31 @@ void main()
 
 void setupINTOSC(void)
 {
-    //Seleccion de Oscilador interno
-    OSCCONbits.SCS = 1;
+    ANSELH = 0;
+    ANSELbits.ANS0 = 1;
+    ANSELbits.ANS1 = 1;
+
+    PORTA = 0;
+
+
+    //puerto del contador (salida)
+    TRISB = 0;
+    PORTB = 0;
+
+    TRISD = 0;
+    PORTD = 0;
+
+    TRISC = 0;
+    PORTC = 0;
+
 
     // oscilador a 4MHz
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 0;
 
-    //puerto del contador (salida)
-    TRISB = 0;
-    PORTB = 0;
+     //Seleccion de Oscilador interno
+    OSCCONbits.SCS = 1;
 }
 
 void ADC_CONV_V(void)
@@ -135,21 +150,13 @@ void ADC_CONV_V(void)
 
 void VISUAL_LCD(void)
 {
+
  Lcd_Set_Cursor(1,1);   //direccion donde se escribira
- sprintf(buffer_LCD, "S1:    S2:    cont:");    //mensaje
- Lcd_Write_String(buffer_LCD);  //imprimir mensaje
+ Lcd_Write_String( "S1:    S2: cont:");  //imprimir mensaje
 
  Lcd_Set_Cursor(2,1);   //direccion donde se escribira
  sprintf(buffer_LCD, "%u.%u%u  %u.%u%u    %u  ", unidad_V1, decima_V1, //mensaje
  centesima_V1, unidad_V2, decima_V2, centesima_V2, contador);   //variables
- Lcd_Write_String(buffer_LCD);  //imprimir mensaje
-
- Lcd_Set_Cursor(3,1);   //direccion donde se escribira
- sprintf(buffer_LCD, " voltajes y contador ");  //mensaje
- Lcd_Write_String(buffer_LCD);  //imprimir mensaje
-
- Lcd_Set_Cursor(4,1);   //direccion donde se escribira
- sprintf(buffer_LCD, "   LABORATORIO 02   ");   //mensaje
  Lcd_Write_String(buffer_LCD);  //imprimir mensaje
 
  __delay_ms(150);   //delay de funcionamiento
@@ -157,7 +164,7 @@ void VISUAL_LCD(void)
 
 void TX_RX(void)
 {
- sprintf(buffer_UART, "Valor ADC1: %u , Valor ADC2: %u\r\n", //mensaje a transmitir
+sprintf(buffer_UART, "Valor ADC1: %u , Valor ADC2: %u\r\n", //mensaje a transmitir
          valor_ch0, valor_ch1); //variables
  Uart_Send_String(buffer_UART); //mandar mensaje
  __delay_ms(150);               //delay de funcionamiento
@@ -174,5 +181,5 @@ void TX_RX(void)
                 contador = contador - 1; // si se cumple decrementamos
             }
         }
-        PORTB = contador;   // asignamos el valor del contador al puerto
+        PORTE = contador;   // asignamos el valor del contador al puerto
 }
